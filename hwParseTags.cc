@@ -1,9 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <unordered_map>
-#include <map>
 #include <regex>
-using namespace std;
 
 /*
 	Tags in html are enclosed in angle brackets <>
@@ -32,41 +29,7 @@ using namespace std;
 	That is to say, there are many occurrences of each tag
 
  */
-
-void readHTMLFileOutputTags(const char filename[]) {
-	ifstream f(filename);
-	char buf[4096]; // make sure it's big enough
-	regex tag("<(\\w+)>");
-	smatch m;
-	unordered_map<string, uint32_t> frequency;
-	uint32_t line = 0;
-	while (!f.eof()) {
-		f.getline(buf, 4096);
-		line++;
-		if (line % 1000 == 0)
-			cerr << "Read " << line << '\n'; 
-		string s(buf);
-		while(regex_search(s, m, tag)) {
-			for (auto x : m) {
-				//				cout << "Found " << x << " count=" << frequency[x] << '\n';
-				frequency[x]++;
-			}
-			s = m.suffix().str();			
-		}
-	}
-	cout << "Done searching\n";
-	for (auto x: frequency) {
-		cout << x.first << "==>" << x.second << '\n';
-	}
-	multimap<uint32_t, string> byFreq;
-	for (auto x : frequency) {
-		byFreq.insert(make_pair(x.second, x.first));
-	}
-	for (auto x : byFreq) {
-		cout << x.first << "==>" << x.second << '\n';
-	}
-}
-int main(int argc, char* argv[]) {
-	readHTMLFileOutputTags(argv[1]);
+int main() {
+	readHTMLFileOutputTags("enwik8");
 }
 	
