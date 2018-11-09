@@ -14,11 +14,13 @@ private:
 	void loadPNG(int fh);
 	void savePNG(int fh);
 	Image(uint32_t width, uint32_t height) :
-		width(width), height(height), rgba(nullptr) {}
+		width(width), height(height), rgba(new uint32_t[width*height]) {}
 public:
 	Image(uint32_t width, uint32_t height, const uint32_t RGBVAL);
 	Image(const char filename[]);
-	~Image();
+	~Image() {
+		delete [] rgba;
+	}
 	Image(const Image &);
 	Image& operator =(const Image &);
 	Image(Image&& orig) : width(orig.width), height(orig.height), rgba(orig.rgba) {

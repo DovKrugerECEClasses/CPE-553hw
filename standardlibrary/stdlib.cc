@@ -4,12 +4,15 @@ int main() {
 	print(list);
 
 	map<string,double> m;
-	load(m, "stock.dat"); // load the stock quotes into the map m
+	load(m, "stocks.dat"); // load the stock quotes into the map m
 	// write code to print out the map.  Because it is a tree,
 	// it will print in sorted order
 
+	cout << m["AAPL"] << '\n'; // O(log n)
+	 
 	unordered_map<string,double> hash;
-	load(hash, "stock.dat"); // load the stock quotes into the unordered_map hash
+	load(hash, "stocks.dat"); // load the stock quotes into the unordered_map hash
 	// write code to print out the hashmap.  It will be in a random order because
 	// hashmaps are not sorted (but they are faster for lookup).
+	cout << hash["AAPL"] << '\n';
 }
