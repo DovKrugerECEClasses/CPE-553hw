@@ -1,0 +1,4 @@
+The code in this directory is written.  Your job is to create a Makefile
+to put it all together.
+
+Take a look at the files here and build an executable called bank.

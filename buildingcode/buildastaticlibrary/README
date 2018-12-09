@@ -1,0 +1,35 @@
+In this directory, your job is to build a static library libmymath.a
+which contains all the routines in these files.  You must also
+complete the function stats.  Because C++ is not a
+standardized calling sequence, you cannot call C++ functions, so
+notice that the entry points are all defined in C.
+
+This is done using the construct:
+
+extern "C" {
+
+}
+
+within the brackets all definitions are C, not C++ and therefore
+portable.  This also means that there is no overloading, in other words there
+cannot be two functions with the same name.
+
+C functions start with an underscore, so the name of the function f
+internally is: _f
+
+The function stats is written in Statistics.cc
+You must make it compute the max and min values of the list, and compute the
+mean (sum the elements and divide by the number of elements).
+Then to calculate variance, for each element of the list compute
+   x[i] - mean
+sum the squares of this value, and divide the final sum by n
+
+Store the four numbers min, max, mean, variance in the Statistics object.
+
+You are not building a program, so there is no main.
+In order to build a library, use the unix archive utility:
+
+g++ -c Statistics.cc
+ar rvs libstats.a Statistics.o
+
+You should, of course, do this in a Makefile
